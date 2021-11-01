@@ -17,7 +17,7 @@ def count_year():
 
 def grouping_catalog_wine(filename):
     excel_data_df = pandas.read_excel(filename, na_values=None, keep_default_na=False)
-    excel_data_with_wine = excel_data_df.to_dict('records')
+    excel_data_with_wine = excel_data_df.to_dict("records")
     result = defaultdict(list)
     for wine in excel_data_with_wine:
         category = wine["Категория"]
@@ -30,24 +30,24 @@ def rendering_site(filepath):
     catalog_wine = grouping_catalog_wine(filename=filepath)
     catalog_wine_sort = sorted(catalog_wine.items())
     env = Environment(
-        loader=FileSystemLoader('.'),
-        autoescape=select_autoescape(['html', 'xml'])
+        loader=FileSystemLoader("."),
+        autoescape=select_autoescape(["html", "xml"])
     )
-    template = env.get_template('template.html')
+    template = env.get_template("template.html")
     rendered_page = template.render(
         age_company_text=f"Уже {year} год с вами",
         data_wine=dict(catalog_wine_sort).values()
     )
-    with open('index.html', 'w', encoding="utf8") as file:
+    with open("index.html", "w", encoding="utf8") as file:
         file.write(rendered_page)
 
 
 def main():
-    filepath = os.path.abspath('wine3.xlsx')
+    filepath = os.path.abspath("wine3.xlsx")
     rendering_site(filepath)
-    server = HTTPServer(('127.0.0.1', 8000), SimpleHTTPRequestHandler)
+    server = HTTPServer(("127.0.0.1", 8000), SimpleHTTPRequestHandler)
     server.serve_forever()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
