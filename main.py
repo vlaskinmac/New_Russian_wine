@@ -30,11 +30,11 @@ def render_site(filepath):
     year_of_opening = 1920
     current_year = datetime.now().year
     year = current_year - year_of_opening
-    catalog_wine = group_wine_catalog(filename=filepath)
-    catalog_wine_sort = sorted(catalog_wine.items())
+    wine_catalog = group_wine_catalog(filename=filepath)
+    wine_catalog_sort = sorted(wine_catalog.items())
     rendered_page = template.render(
-        age_company_text=f"Уже {year} год с вами",
-        data_wine=dict(catalog_wine_sort).values()
+        age_of_the_company=f"Уже {year} год с вами",
+        data_wine=dict(wine_catalog_sort).values()
     )
     with open("index.html", "w", encoding="utf8") as file:
         file.write(rendered_page)
