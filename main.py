@@ -41,7 +41,7 @@ def render_site(filepath):
 
 
 def main():
-    filepath = os.path.abspath("wine3.xlsx")
+    filepath = os.path.abspath("wines.xlsx")
     render_site(filepath)
     server = HTTPServer(("127.0.0.1", 8000), SimpleHTTPRequestHandler)
     server.serve_forever()

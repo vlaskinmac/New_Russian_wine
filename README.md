@@ -35,6 +35,17 @@ $ python3 main.py
 
 - Go to the website at [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
+### Exsamples
+For example, you can use the file **wines.xlsx** which is attached in the repository.
+
+The data in the table looks like this:
+
+| Категория     | Название            | Сорт           |Цена|Картинка                 |Акция               |
+| --------------| --------------------| -------------- |---:|-------------------------|--------------------|
+| Белые вина    | Белая леди          |Дамский пальчик |399 |belaya_ledi.png          |Выгодное предложение|
+| Напитки       | Коньяк классический |                |350 |konyak_klassicheskyi.png |                    |
+| Красные вина  | Хванчкара           |Александраули   |550 |hvanchkara.png           |Выгодное предложение|
+
 
 ### Project objectives
 
