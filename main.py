@@ -34,7 +34,7 @@ def render_site(filepath):
     wine_catalog_sort = sorted(wine_catalog.items())
     rendered_page = template.render(
         age_of_the_company=f"Уже {year} год с вами",
-        data_wine=dict(wine_catalog_sort).values()
+        wines=dict(wine_catalog_sort).values()
     )
     with open("index.html", "w", encoding="utf8") as file:
         file.write(rendered_page)
