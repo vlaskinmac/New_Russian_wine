@@ -17,18 +17,21 @@ def group_wine_catalog(filename):
     return result
 
 
-def rendering_site(filepath):
-    year_of_opening = 1920
-    current_year = datetime.now().year
-    year = current_year - year_of_opening
-
-    catalog_wine = group_wine_catalog(filename=filepath)
-    catalog_wine_sort = sorted(catalog_wine.items())
+def forms_template():
     env = Environment(
         loader=FileSystemLoader("."),
         autoescape=select_autoescape(["html", "xml"])
     )
-    template = env.get_template("template.html")
+    return env.get_template("template.html")
+
+
+def render_site(filepath):
+    template = forms_template()
+    year_of_opening = 1920
+    current_year = datetime.now().year
+    year = current_year - year_of_opening
+    catalog_wine = group_wine_catalog(filename=filepath)
+    catalog_wine_sort = sorted(catalog_wine.items())
     rendered_page = template.render(
         age_company_text=f"Уже {year} год с вами",
         data_wine=dict(catalog_wine_sort).values()
@@ -39,7 +42,7 @@ def rendering_site(filepath):
 
 def main():
     filepath = os.path.abspath("wine3.xlsx")
-    rendering_site(filepath)
+    render_site(filepath)
     server = HTTPServer(("127.0.0.1", 8000), SimpleHTTPRequestHandler)
     server.serve_forever()
 
