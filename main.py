@@ -7,14 +7,6 @@ import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
-def count_year():
-    today = datetime.now()
-    date = datetime(1920, 1, 1)
-    period = (today - date)
-    year = period.days // 365
-    return year
-
-
 def grouping_catalog_wine(filename):
     excel_data_df = pandas.read_excel(filename, na_values=None, keep_default_na=False)
     excel_data_with_wine = excel_data_df.to_dict("records")
@@ -26,7 +18,10 @@ def grouping_catalog_wine(filename):
 
 
 def rendering_site(filepath):
-    year = count_year()
+    year_of_opening = 1920
+    current_year = datetime.now().year
+    year = current_year - year_of_opening
+
     catalog_wine = grouping_catalog_wine(filename=filepath)
     catalog_wine_sort = sorted(catalog_wine.items())
     env = Environment(
