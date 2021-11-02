@@ -9,9 +9,9 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 def group_wine_catalog(filename):
     excel_data_df = pandas.read_excel(filename, na_values=None, keep_default_na=False)
-    excel_data_with_wine = excel_data_df.to_dict("records")
+    grouped_of_wines = excel_data_df.to_dict("records")
     result = defaultdict(list)
-    for wine in excel_data_with_wine:
+    for wine in grouped_of_wines:
         category = wine["Категория"]
         result[category].append(wine)
     return result
