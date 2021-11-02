@@ -7,7 +7,7 @@ import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
-def grouping_catalog_wine(filename):
+def group_wine_catalog(filename):
     excel_data_df = pandas.read_excel(filename, na_values=None, keep_default_na=False)
     excel_data_with_wine = excel_data_df.to_dict("records")
     result = defaultdict(list)
@@ -22,7 +22,7 @@ def rendering_site(filepath):
     current_year = datetime.now().year
     year = current_year - year_of_opening
 
-    catalog_wine = grouping_catalog_wine(filename=filepath)
+    catalog_wine = group_wine_catalog(filename=filepath)
     catalog_wine_sort = sorted(catalog_wine.items())
     env = Environment(
         loader=FileSystemLoader("."),
