@@ -28,7 +28,11 @@ pip3 install -r requirements.txt
 ### Launch code
 
 - Download the code.
-- Launch the website with the command: `python3 main.py`.
+- Launch the website with the command:
+```
+$ python3 main.py
+```
+
 - Go to the website at [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 
