@@ -25,27 +25,24 @@ def get_template():
     return env.get_template("template.html")
 
 
-def render_site(filepath):
+def render_site(year, wine_catalog_sort):
     template = get_template()
-    year_of_opening = 1920
-    current_year = datetime.now().year
-    year = current_year - year_of_opening
-
-    wine_catalog = group_wine_catalog(filename=filepath)
-    wine_catalog_sort = sorted(wine_catalog.items())
-
     rendered_page = template.render(
         age_of_the_company=f"Уже {year} год с вами",
         wines=dict(wine_catalog_sort).values()
     )
-
     with open("index.html", "w", encoding="utf8") as file:
         file.write(rendered_page)
 
 
 def main():
     filepath = os.path.abspath("wines.xlsx")
-    render_site(filepath)
+    year_of_opening = 1920
+    current_year = datetime.now().year
+    year = current_year - year_of_opening
+    wine_catalog = group_wine_catalog(filename=filepath)
+    wine_catalog_sort = sorted(wine_catalog.items())
+    render_site(year, wine_catalog_sort)
     server = HTTPServer(("127.0.0.1", 8000), SimpleHTTPRequestHandler)
     server.serve_forever()
 
