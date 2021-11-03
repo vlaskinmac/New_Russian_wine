@@ -17,7 +17,7 @@ def group_wine_catalog(filename):
     return grouped_wines
 
 
-def forms_template():
+def get_template():
     env = Environment(
         loader=FileSystemLoader("."),
         autoescape=select_autoescape(["html", "xml"])
@@ -26,16 +26,19 @@ def forms_template():
 
 
 def render_site(filepath):
-    template = forms_template()
+    template = get_template()
     year_of_opening = 1920
     current_year = datetime.now().year
     year = current_year - year_of_opening
+
     wine_catalog = group_wine_catalog(filename=filepath)
     wine_catalog_sort = sorted(wine_catalog.items())
+
     rendered_page = template.render(
         age_of_the_company=f"Уже {year} год с вами",
         wines=dict(wine_catalog_sort).values()
     )
+
     with open("index.html", "w", encoding="utf8") as file:
         file.write(rendered_page)
 
